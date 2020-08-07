@@ -43,7 +43,8 @@ export default function App() {
               headerShown: false
             }} />
         </Stack.Navigator>
-        <BottomModal />
+        {/* TODO detail screen wont show bottom modal */}
+        {/* <BottomModal /> */}
       </NavigationContainer>
     </Provider>
   );
