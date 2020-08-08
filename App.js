@@ -4,13 +4,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
-import BottomModal from './src/components/BottomModalBar/BottomModal';
-import store from './src/redux/store';
-import Home from './src/screens/home/index';
-import ListView from './src/screens/listView/ListView';
 import { StackNavigationRef } from './src/modules/Navigation/StackNavigation';
+import store from './src/redux/store';
 import CollectionScreen from './src/screens/collection/CollectionScreen';
 import DetailScreen from './src/screens/details/DetailScreen';
+import Home from './src/screens/home/index';
 
 
 export default function App() {
@@ -21,7 +19,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer ref={StackNavigationRef} styles={styles.container}>
         {/* <StatusBar/> */}
-        <Stack.Navigator mode="modal" >
+        <Stack.Navigator mode="modal">
           <Stack.Screen
             name="Home"
             children={Home}
@@ -40,7 +38,8 @@ export default function App() {
             name="DetailScreen"
             component={DetailScreen}
             options={{
-              headerShown: false
+              headerShown: false,
+              gestureEnabled: false
             }} />
         </Stack.Navigator>
         {/* TODO detail screen wont show bottom modal */}

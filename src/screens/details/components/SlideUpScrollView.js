@@ -59,7 +59,6 @@ export default class SlideUpScrollView extends Component {
       onPanResponderTerminate: this._handlePanResponderEnd,
       onShouldBlockNativeResponder: (evt, gestureState) => true,
     });
-
   }
 
   componentDidMount() {
@@ -69,21 +68,22 @@ export default class SlideUpScrollView extends Component {
     });
     this._animatedPosition.setValue(this._animatedPosition._value);
     this._currentPosition = this._animatedPosition._value;
+    this.bounceIn()
   }
 
   render() {
     const { children, header, bgImgUri } = this.props
     const animatedOpacity = this._animatedOpacity.interpolate({
       inputRange: [this.config.position.end, this.config.position.start],
-      outputRange: [this.config.opacity.end, this.config.opacity.start],
+      outputRange: ["rgba(0,0,0,1)", "rgba(0,0,0,0)"],
     })
     return (
       <Animated.View style={[styles.container, this.getContainerStyle()]}>
         <StatusBar barStyle={"light-content"} />
         <ImageBackground source={{ uri: bgImgUri }} style={{ width: '100%', height: '100%' }}>
-          <Animated.View style={[styles.backdrop, { opacity: animatedOpacity }, styles.header, this.getHeaderStyle()]}>
+          <Animated.View style={[styles.backdrop, { backgroundColor: animatedOpacity }, styles.header, this.getHeaderStyle()]}>
             <TouchableWithoutFeedback style={styles.headerIcon} onPress={this.props.close}>
-              <Icon name="md-close" size={24} color="white" />
+              <Icon name="md-close" size={24} color={this.state.open ? 'white' : 'black'} />
             </TouchableWithoutFeedback>
           </Animated.View>
           <Animated.View
@@ -153,7 +153,7 @@ export default class SlideUpScrollView extends Component {
   };
   tapped = (gestureState) => gestureState.dx === 0 && gestureState.dy === 0;
   pulledUp = (gestureState) => gestureState.dy < 0;
-  pulledDown = (gestureState) => gestureState.dy > 0;
+  pulledDown = (gestureState) => gestureState.dy > 0 && Math.abs(gestureState.dy) / Math.abs(gestureState.dx) > 2;
   pulledFast = (gestureState) => Math.abs(gestureState.vy) > 3;
   pulledFar = (gestureState) => Math.abs(gestureState.dy) > 50;
   insideAllowedRange = () =>
@@ -202,6 +202,28 @@ export default class SlideUpScrollView extends Component {
   getContainerStyle = () => ({
     zIndex: this.state.pulling || this.state.open ? 1 : -1,
   });
+
+  bounceIn = () => {
+    const bouncePositionMax = this.config.position.start - 100
+    const bouncePositionMin = this.config.position.start
+    Animated.sequence([
+      Animated.timing(
+        this._animatedPosition,
+        {
+          toValue: bouncePositionMax,
+          duration: 300,
+          useNativeDriver: true
+        })
+      ,
+      Animated.spring(
+        this._animatedPosition,
+        {
+          toValue: bouncePositionMin,
+          bounciness: 20,
+          useNativeDriver: true
+        }),
+    ]).start()
+  }
 }
 const styles = StyleSheet.create({
   container: {
