@@ -1,9 +1,8 @@
-import React from 'react'
-import { View, Text, FlatList, StyleSheet, Image } from 'react-native'
-import { Card, Paragraph, Button } from 'react-native-paper';
-import { _products } from '../../../../components/_fakeData'
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { navigate } from '../../../../modules/Navigation/StackNavigation'
+import React from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
+import ProductCard from '../../../../components/Card';
+import { _products } from '../../../../components/_fakeData';
+import { navigate } from '../../../../modules/Navigation/StackNavigation';
 export default ManNewInScreen = ({ listData }) => {
   return (
     <View>
@@ -19,24 +18,17 @@ export default ManNewInScreen = ({ listData }) => {
 }
 
 var renderItem = ({ item }) => {
+  const { imagePath, title, price } = item
   return (
-    <Card
-      style={styles.cardContainer}
-      onPress={() => navigate('DetailScreen', { data: item })}
-    >
-      <Card.Cover source={{ uri: item.imagePath }} />
-      <View style={styles.cardDesc}>
-        <Card.Content style={styles.cardContent}>
-          <Paragraph style={styles.cardContentTitle}>{item.title}</Paragraph>
-          <Paragraph style={styles.cardContentPrice}>{item.price}</Paragraph>
-        </Card.Content>
-        <Card.Actions style={styles.cardActions}>
-          <Button>
-            <Icon name="bookmark-o" />
-          </Button>
-        </Card.Actions>
-      </View>
-    </Card>
+    <ProductCard
+      onPressCard={() => navigate('DetailScreen', { data: item })}
+      imgUri={imagePath}
+      title={title}
+      price={price}
+      onPressBookMark={() => { }}
+      containerStyle={{ width: '45%' }}
+    // onPressAddToCart={}
+    />
   )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Button, Image, ImageBackground, Dimensions } from 'react-native'
-import  * as StackNavigation from '../../../../modules/Navigation/StackNavigation';
+import { navigate } from '../../../../modules/Navigation/StackNavigation';
 
 
 export default ManNewIn = ({
@@ -17,7 +17,7 @@ export default ManNewIn = ({
       </Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => StackNavigation.navigate('ManNewInScreen')}
+        onPress={() => navigate('ManNewInScreen')}
       >
         <Text style={styles.btnText}>VIEW</Text>
       </TouchableOpacity>
