@@ -27,7 +27,6 @@ export default function App() {
               headerShown: false
             }}
           />
-          {/* <Stack.Screen name="ListView" component={ListView} /> */}
           <Stack.Screen
             name="CollectionScreen"
             component={CollectionScreen}

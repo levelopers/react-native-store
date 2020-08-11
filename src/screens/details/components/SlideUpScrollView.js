@@ -49,7 +49,7 @@ export default class SlideUpScrollView extends Component {
     this._animatedOpacity = new Animated.Value(this.config.opacity.start);
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: this._grantPanResponder,
-      onStartShouldSetPanResponderCapture: this._grantPanResponder,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
       onMoveShouldSetPanResponder: this._grantPanResponder,
       onMoveShouldSetPanResponderCapture: this._grantPanResponder,
       onPanResponderGrant: this._handlePanResponderGrant,

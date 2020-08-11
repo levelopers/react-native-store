@@ -7,81 +7,93 @@ import {
   TouchableHighlight,
   View
 } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import CollectionManTab from "./CollectionManTab";
+import Icon from 'react-native-vector-icons/Ionicons';
+import { createMaterialTopTabNavigator, MaterialTopTabBar } from '@react-navigation/material-top-tabs';
+import CollectionManTab from "./components/CollectionManTab";
+import globalStyles from "../../modules/globalStyles";
+import CollectionWomanTab from "./components/CollectionWomanTab";
+import CollectionKidsTab from "./components/CollectionKidsTab";
+import { goBack, navigate } from "../../modules/Navigation/StackNavigation";
 
 export default CollectionScreen = ({
   navigation
 }) => {
   const CollectionScreenTopTabs = createMaterialTopTabNavigator();
   return (
-      <CollectionScreenTopTabs.Navigator
-        style={styles.navigationContainer}
-        tabBarOptions={{
-          indicatorStyle: styles.topTabIndicatorStyle,
-          style: styles.topTabsContainer,
-          tabStyle: styles.topTabs,
-          labelStyle: styles.topTabLabelStyle
+    <CollectionScreenTopTabs.Navigator
+      style={styles.navigationContainer}
+      tabBar={tabBar}
+      tabBarOptions={{
+        indicatorStyle: styles.topTabIndicatorStyle,
+        tabStyle: styles.topTabs,
+        labelStyle: styles.topTabLabelStyle
+      }}
+    >
+      <CollectionScreenTopTabs.Screen
+        name="CollectionManTab"
+        component={CollectionManTab}
+        options={{
+          title: "MAN"
         }}
-      >
-        <CollectionScreenTopTabs.Screen
-          name="CollectionManTab"
-          component={CollectionManTab}
-          options={{
-            title: "MAN"
-          }}
-        />
-        <CollectionScreenTopTabs.Screen
-          name="CollectionManTab1"
-          component={CollectionManTab}
-          options={{
-            title: "MAN"
-          }}
-        />
-      </CollectionScreenTopTabs.Navigator>
-      // <TouchableHighlight
-      //   style={styles.closeButton}
-      //   onPress={() => {navigation.pop() }}
-      // >
-      //   <Icon size={30} name="times" style={styles.closeIcon} />
-      // </TouchableHighlight>
-
+      />
+      <CollectionScreenTopTabs.Screen
+        name="CollectionWomanTab"
+        component={CollectionWomanTab}
+        options={{
+          title: "WOMAN"
+        }}
+      />
+      <CollectionScreenTopTabs.Screen
+        name="CollectionKidsTab"
+        component={CollectionKidsTab}
+        options={{
+          title: "KIDS"
+        }}
+      />
+    </CollectionScreenTopTabs.Navigator>
   )
 }
 
+const tabBar = (props) => {
+  return (
+    <View style={styles.topTabsContainer} >
+      <MaterialTopTabBar {...props} style={styles.materialTopTab} />
+      <Icon
+        size={30}
+        name="md-close"
+        color='white'
+        style={styles.closeIcon}
+        onPress={() => { navigate('Home') }}
+      />
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
-  closeButton: {
-    position: 'absolute',
-    right: 20,
-    top: Constants.statusBarHeight
-  },
   closeIcon: {
-    fontWeight: '100'
-  },
-  modalView: {
-    // paddingTop: Constants.statusBarHeight,
-    // display: 'flex',
-    // flexDirection: 'row'
-    // // flexDirection: 'column'
+    alignSelf: 'center'
   },
   navigationContainer: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: 'black'
   },
-  // topTabIndicatorStyle: {
-  //   backgroundColor: 'black'
-  // },
-  // topTabsContainer: {
-  //   backgroundColor: 'transparent',
-  //   position: 'absolute',
-  //   top: 30,
-  //   left: 50,
-  //   right: 50,
-  // },
-  // topTabs: {
-  // },
-  // topTabLabelStyle: {
-  //   fontWeight: 'bold',
-  //   fontSize: 15
-  // }
+  topTabIndicatorStyle: {
+    backgroundColor: 'white',
+  },
+  topTabLabelStyle: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: 'white'
+  },
+  topTabsContainer: {
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    paddingVertical: 30,
+    paddingHorizontal: 25
+  },
+  materialTopTab: {
+    flex: 1,
+    marginRight: 30,
+    backgroundColor: 'transparent'
+  },
 });

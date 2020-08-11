@@ -17,10 +17,6 @@ export default () => {
         }}
       />
       <HomeStack.Screen
-        name="ListView"
-        component={ListView}
-      />
-      <HomeStack.Screen
         name="ManNewInScreen"
         component={ManNewInScreen}
         options={{

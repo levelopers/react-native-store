@@ -1,14 +1,18 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
+import { View, Text, StyleSheet, TouchableHighlight, Dimensions } from 'react-native'
 import Constants from "expo-constants";
 import { goBack, navigate } from '../../modules/Navigation/StackNavigation';
 import SlideUpScrollView from './components/SlideUpScrollView';
 import globalStyle from '../../modules/globalStyles'
 import { _products } from '../../components/_fakeData'
 import { FlatList } from 'react-native-gesture-handler';
+import ButtonAddToCart from '../../components/Buttons/ButtonAddToCart';
+import ButtonBookMark from '../../components/Buttons/ButtonBookMark';
+import ButtonShare from '../../components/Buttons/ButtonShare';
+import ButtonViewCart from '../../components/Buttons/ButtonViewCart';
 
+// TODO redux feed in _products
 export default DetailScreen = ({ route }) => {
-  // TODO prevent default modal navigator slide down close gesture
   const { title, description, price, imagePath } = route.params.data
   return (
     <SlideUpScrollView
@@ -16,34 +20,42 @@ export default DetailScreen = ({ route }) => {
       bgImgUri={imagePath}
       close={() => goBack()}
     >
-      <View style={styles.contentHeader}>
-        <Text style={globalStyle('fontWhite')}>
-          {title}
-        </Text>
-        <Text style={[globalStyle('fontWhite'), styles.price]}>
-          {price}
-        </Text>
-        <View style={styles.buttons}>
-          <TouchableHighlight>
-            <Text style={globalStyle('fontWhite')}>Add To Cart</Text>
-          </TouchableHighlight>
-          {/* TODO share,bookmark,view store */}
+      <View style={styles.container}>
+        <View style={styles.contentHeader}>
+          <Text style={styles.title}>
+            {title ? title.toUpperCase() : ''}
+          </Text>
+          <Text style={styles.price}>
+            {price} CAD
+          </Text>
+          <View style={styles.buttons}>
+            <ButtonAddToCart />
+            <View style={styles.iconButtons}>
+              <ButtonShare />
+              <ButtonBookMark />
+              <ButtonViewCart />
+            </View>
+          </View>
         </View>
-      </View>
-      <Text style={[globalStyle('fontWhite'), styles.desc]}>
-        {description}
-      </Text>
-      <View style={styles.recomend}>
-        <Text>Recommend</Text>
-        <FlatList
-          data={_products}
-          renderItem={recommendItem}
-          horizontal={true}
-          keyExtractor={(item) => item._id}
-        />
-      </View>
-      <View style={styles.footer}>
-
+        <Text style={styles.description}>
+          {description}
+        </Text>
+        <View style={styles.recomend}>
+          <View style={styles.recommendHeader}>
+            <Text style={styles.recomendTitle}>COLLOCATION</Text>
+            <Text style={styles.recomendSubTitle}>{_products.length} Items</Text>
+          </View>
+          <FlatList
+            data={_products}
+            renderItem={recommendItem}
+            horizontal={true}
+            keyExtractor={(item) => item._id}
+          // TODO add pagination
+          />
+        </View>
+        <View style={styles.footer}>
+          {/* TODO add footer */}
+        </View>
       </View>
     </SlideUpScrollView>
   )
@@ -64,7 +76,46 @@ const recommendItem = ({ item }) => {
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent'
-    // marginTop: Constants.statusBarHeight
+    paddingHorizontal: 20,
+    paddingVertical: 18
+  },
+  title: {
+    ...globalStyle('fontWhite'),
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  price: {
+    ...globalStyle('fontWhite'),
+    paddingTop: 5,
+  },
+  buttons: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingVertical: 10
+  },
+  iconButtons: {
+    flexDirection: 'row',
+    marginLeft: 'auto'
+  },
+  description: {
+    ...globalStyle('fontWhite'),
+    paddingVertical: 30,
+    fontSize: 13
+  },
+  recomend: {
+    // width: Dimensions.get('window').width
+  },
+  recommendHeader: {
+    paddingVertical: 10
+  },
+  recomendTitle: {
+    ...globalStyle('fontWhite'),
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  recomendSubTitle: {
+    ...globalStyle('fontWhite'),
+    color: 'grey'
   },
 })
