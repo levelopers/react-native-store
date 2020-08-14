@@ -72,3 +72,38 @@ export const _products = [{
   category: 'Jeans',
 }
 ]
+
+export const departments = [
+  {
+    departmentName: 'Women',
+    categories: 'Basics,Blazer,Jackets,Dresses,T-shirt,Pants,Jeans,Shorts,Skirts,Suits'
+  },
+  {
+    departmentName: 'Men',
+    categories: 'Knitwear,Jeans,Jackets,Overshirts,Polo Shirts,Blazers,Hoodies'
+  },
+  {//TODO add data
+    departmentName: 'Kids',
+    categories: 'T-shirts,Basics,Jackets'
+  }
+]
+
+export const MenDepartment = {
+  departmentName: 'Men',
+  categories: 'Knitwear,Jeans,Jackets,Overshirts,Polo Shirts,Blazers,Hoodies,Pants,Knitwear,Jeans,Jackets,Overshirts,Polo Shirts,Blazers,Hoodies,Pants'
+}
+
+export const WomenDepartment = {
+  departmentName: 'Women',
+  categories: 'Basics,Blazer,Jackets,Dresses,T-shirt,Pants,Jeans,Shorts,Skirts,Suits'
+}
+
+export const KidsDepartment = {
+  departmentName: 'Kids',
+  categories: 'T-shirts,Basics,Jackets'
+}
+
+export const shoesAndBags={
+  categoryName: 'shoesAndBags',
+  subCategory: 'shoes,bags'
+}

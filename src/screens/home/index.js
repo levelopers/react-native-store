@@ -1,8 +1,7 @@
-import React from 'react'
-import ListView from '../listView/ListView';
-import Home from './Home';
 import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
 import ManNewInScreen from './components/ManScreens/ManNewInScreen';
+import Home from './Home';
 
 export default () => {
   const HomeStack = createStackNavigator();

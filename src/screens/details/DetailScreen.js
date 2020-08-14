@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 13
   },
   recomend: {
-    // width: Dimensions.get('window').width
+    // width: Dimensions.get('window').width TODO
   },
   recommendHeader: {
     paddingVertical: 10
