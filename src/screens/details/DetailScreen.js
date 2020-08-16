@@ -31,9 +31,9 @@ export default DetailScreen = ({ route }) => {
           <View style={styles.buttons}>
             <ButtonAddToCart />
             <View style={styles.iconButtons}>
-              <ButtonShare />
-              <ButtonBookMark />
-              <ButtonViewCart />
+              <ButtonShare size={20} style={{ padding: 10 }} />
+              <ButtonBookMark size={20} style={{ padding: 10 }} onPress={() => { }} />
+              <ButtonViewCart size={20} style={{ padding: 10 }} />
             </View>
           </View>
         </View>

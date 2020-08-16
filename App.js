@@ -10,6 +10,8 @@ import CollectionScreen from './src/screens/collection/CollectionScreen';
 import DetailScreen from './src/screens/details/DetailScreen';
 import Home from './src/screens/home/index';
 import SearchScreen from './src/screens/search/SearchScreen';
+import BookMarkScreen from './src/screens/bookmark/BookMarkScreen';
+import AccountScreen from './src/screens/AccountScreen/AccountScreen';
 
 
 export default function App() {
@@ -50,6 +52,20 @@ export default function App() {
           <Stack.Screen
             name="CartScreen"
             component={CartScreen}
+            options={{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen
+            name="BookMarkScreen"
+            component={BookMarkScreen}
+            options={{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen
+            name="AccountScreen"
+            component={AccountScreen}
             options={{
               headerShown: false
             }}

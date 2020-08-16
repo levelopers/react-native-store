@@ -2,7 +2,11 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import ButtonAccount from '../../components/Buttons/ButtonAccount';
+import ButtonBookMark from '../../components/Buttons/ButtonBookMark';
+import ButtonMenu from '../../components/Buttons/ButtonMenu';
+import ButtonSearch from '../../components/Buttons/ButtonSearch';
+import ButtonViewCart from '../../components/Buttons/ButtonViewCart';
 import globalStyles from '../../modules/globalStyles';
 import { navigate } from '../../modules/Navigation/StackNavigation';
 import ManNewInScreen from './components/ManScreens/ManNewInScreen';
@@ -21,7 +25,7 @@ export default () => {
         style={{ display: 'none' }}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon name="search" color={color} style={styles.icon} />
+            <ButtonSearch size={16} color={color} />
           ),
         }}
         listeners={{
@@ -32,12 +36,49 @@ export default () => {
         }}
       />
       <BottomTab.Screen
-        name="HomeStack"
-        component={HomeStack}
+        name="BookMarkScreenNav"
+        component={fakeComponent}
+        style={{ display: 'none' }}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <ButtonBookMark size={16} color={color} />
+          ),
+        }}
         listeners={{
           tabPress: e => {
             e.preventDefault();
-            // navigate('CartScreen')
+            navigate('BookMarkScreen')
+          },
+        }}
+      />
+      <BottomTab.Screen
+        name="HomeStack"
+        component={HomeStack}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <ButtonMenu size={16} color={color} />
+          ),
+        }}
+        listeners={{
+          tabPress: e => {
+            e.preventDefault();
+            navigate('CollectionScreen')
+          },
+        }}
+      />
+      <BottomTab.Screen
+        name="AccountScreenNav"
+        component={fakeComponent}
+        style={{ display: 'none' }}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <ButtonAccount size={16} color={color} />
+          ),
+        }}
+        listeners={{
+          tabPress: e => {
+            e.preventDefault();
+            navigate('AccountScreen')
           },
         }}
       />
@@ -46,8 +87,7 @@ export default () => {
         component={fakeComponent}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon name="shopping-bag" color={color} style={styles.icon} />
-            //TODO style adjustment <ButtonViewCart/>
+            <ButtonViewCart size={16} color={color} />
           )
         }}
         listeners={{
@@ -91,9 +131,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: '100',
-    opacity: 0.8
   },
 })
 var fakeComponent = () => (

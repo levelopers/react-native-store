@@ -2,17 +2,16 @@ import React from 'react'
 import { TouchableHighlight, Text, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
-export default ButtonViewCart = () => {
+export default ButtonViewCart = ({ style, size, color, onPress }) => {
   return (
-    <TouchableHighlight style={styles.button} onPress={(evt) => { evt.preventDefault(); console.log('view cart modal'); }}>
-      <Icon style={styles.text} size={20} name="bag" />
+    <TouchableHighlight style={[style, styles.button]} onPress={onPress}>
+      <Icon style={styles.text} size={size} color={color} name="bag" />
     </TouchableHighlight>
   )
 }
 
 const styles = StyleSheet.create({
   button: {
-    padding: 10,
     alignSelf: 'center'
   },
   text: {

@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { goBack } from '../../modules/Navigation/StackNavigation';
 
 
-export default BookMarkScreen = () => {
+export default AccountScreen = () => {
 
   return (
     <View style={styles.modalView}>
@@ -20,7 +20,7 @@ export default BookMarkScreen = () => {
       >
         <View>
           <Icon name="times" />
-          <Text>bookmark screen</Text>
+          <Text>AccountScreen</Text>
         </View>
       </TouchableHighlight>
     </View>

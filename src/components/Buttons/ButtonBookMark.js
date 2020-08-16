@@ -2,18 +2,17 @@ import React from 'react'
 import { TouchableHighlight, Text, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default ButtonBookMark = () => {
+export default ButtonBookMark = ({ style, size, color, onPress }) => {
   return (
     // TODO redux dispatch addToBookMark
-    <TouchableHighlight style={styles.button} onPress={(evt) => { evt.preventDefault(); console.log('add to bookmark'); }}>
-      <Icon style={styles.text} size={20} name="bookmark-o" />
+    <TouchableHighlight style={[style, styles.button]} onPress={onPress}>
+      <Icon style={styles.text} size={size} color={color} name="bookmark-o" />
     </TouchableHighlight>
   )
 }
 
 const styles = StyleSheet.create({
   button: {
-    padding: 10,
     alignSelf: 'center'
   },
   text: {
