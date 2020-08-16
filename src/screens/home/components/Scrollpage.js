@@ -1,6 +1,7 @@
 import Constants from "expo-constants";
 import React from 'react';
 import { Animated, Dimensions, ScrollView, StyleSheet, View } from 'react-native';
+import globalStyles from "../../../modules/globalStyles";
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -22,7 +23,8 @@ export default ScrollPage = ({
           { useNativeDriver: false }
         )}
         scrollEventThrottle={16}
-        style={styles.scrollViewContainer}
+        contentContainerStyle={styles.scrollViewContainer}
+        bounces={false}
       >
         {React.Children.map(children, child => {
           return <View style={styles.view}>
@@ -51,7 +53,7 @@ export default ScrollPage = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    height: (globalStyles('windowHeight').height - globalStyles('homeBottomTabHeight').height),
   },
   indicatorContainer: {
     position: 'absolute',
@@ -59,12 +61,12 @@ const styles = StyleSheet.create({
     top: '40%'
   },
   scrollViewContainer: {
-    // paddingTop: Constants.statusBarHeight,
   },
   view: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: (globalStyles('windowHeight').height - globalStyles('homeBottomTabHeight').height),
   },
   pageIndicator: {
     height: 5,

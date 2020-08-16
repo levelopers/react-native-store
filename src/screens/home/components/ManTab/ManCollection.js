@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions, ImageBackground, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ImageBackground, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 
 export default ManCollection = ({
@@ -10,7 +10,7 @@ export default ManCollection = ({
 }) => {
   const [modalVisible, setModalVisible] = useState(false)
   return (
-    <ImageBackground source={{ uri: imgUri }} style={styles.backgroundImage} >
+    <ImageBackground source={{ uri: imgUri }} style={styles.backgroundImage} resizeMode="cover">
       <Text style={styles.title}>
         {title}
       </Text>
@@ -27,8 +27,6 @@ export default ManCollection = ({
     </ImageBackground>
   )
 }
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   title: {
     fontSize: 60,
@@ -54,7 +52,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
     alignItems: 'center',
-    width: screenWidth,
-    height: screenHeight,
+    height: '100%',
+    width: '100%'
   }
 })

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Button, Image, ImageBackground, Dimensions } from 'react-native'
+import React from 'react';
+import { ImageBackground, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { navigate } from '../../../../modules/Navigation/StackNavigation';
 
 
@@ -8,7 +8,7 @@ export default ManNewIn = ({
   imgUri
 }) => {
   return (
-    <ImageBackground source={{ uri: imgUri }} style={styles.backgroundImage} >
+    <ImageBackground source={{ uri: imgUri }} style={styles.backgroundImage} resizeMode="cover" >
       <Text style={styles.title}>
         NEW IN
       </Text>
@@ -24,8 +24,6 @@ export default ManNewIn = ({
     </ImageBackground>
   )
 }
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   title: {
     fontSize: 60,
@@ -51,7 +49,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
     alignItems: 'center',
-    width: screenWidth,
-    height: screenHeight,
+    height: '100%',
+    width: '100%'
   }
 })

@@ -47,6 +47,7 @@ export default Home = () => {
 const styles = StyleSheet.create({
   container: {
     // height: Dimensions.get('window').height,
+    height: '100%'
   },
   topTabIndicatorStyle: {
     backgroundColor: 'black'
