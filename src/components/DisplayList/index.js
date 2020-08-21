@@ -5,7 +5,6 @@ import { navigate } from '../../modules/Navigation/StackNavigation';
 
 export default DisplayList = ({ dataArray }) => {
   return (
-    <View>
       <FlatList
         data={dataArray}
         numColumns={2}
@@ -13,7 +12,6 @@ export default DisplayList = ({ dataArray }) => {
         keyExtractor={item => item._id}
         columnWrapperStyle={{ flexWrap: 'wrap', justifyContent: 'center' }}
       />
-    </View>
   )
 }
 

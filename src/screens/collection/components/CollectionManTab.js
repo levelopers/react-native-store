@@ -32,7 +32,7 @@ export default class CollectionManTab extends Component {
   renderSectionHeader = ({ section }) => {
     if (section.title === 'NEW IN') {
       return (
-        <TouchableOpacity onPress={() => navigate('ManNewInScreen')}>
+        <TouchableOpacity onPress={() => navigate('ListScreen', { title: 'New In' })}>
           <Text style={[styles.header, styles.newInHeader]}>{section.title}</Text>
         </TouchableOpacity>
       )
@@ -52,7 +52,13 @@ export default class CollectionManTab extends Component {
       <Collapsible
         key={item}
         collapsed={section.title !== this.state.activeSection}>
-        <Text style={styles.item}>{item}</Text>
+        <Text
+          style={styles.item}
+          onPress={() => {
+            navigate('ListScreen', { title: item, category: item, department: 'Men' })
+          }}>
+          {item}
+        </Text>
       </Collapsible>
     )
   }

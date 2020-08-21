@@ -1,5 +1,4 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import ButtonAccount from '../../components/Buttons/ButtonAccount';
@@ -9,8 +8,8 @@ import ButtonSearch from '../../components/Buttons/ButtonSearch';
 import ButtonViewCart from '../../components/Buttons/ButtonViewCart';
 import globalStyles from '../../modules/globalStyles';
 import { navigate } from '../../modules/Navigation/StackNavigation';
-import ManNewInScreen from './components/ManScreens/ManNewInScreen';
-import Home from './Home';
+import HomeStack from './HomeStack';
+
 export default () => {
   const BottomTab = createMaterialBottomTabNavigator();
   return (
@@ -98,30 +97,6 @@ export default () => {
         }}
       />
     </BottomTab.Navigator>
-  )
-}
-
-const HomeStack = () => {
-  const HomeStack = createStackNavigator();
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          headerShown: false
-        }}
-      />
-      <HomeStack.Screen
-        name="ManNewInScreen"
-        component={ManNewInScreen}
-        options={{
-          headerTitle: 'New In',
-          headerBackTitle: '',
-          headerBackTitleStyle: { display: 'none' }
-        }}
-      />
-    </HomeStack.Navigator>
   )
 }
 const styles = StyleSheet.create({

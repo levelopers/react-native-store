@@ -2,9 +2,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import KidsTab from './components/KidsTab/KidsTab';
-import ManTab from './components/ManTab/ManTab';
-import WomanTab from './components/WomanTab/WomanTab';
+import TabScreens from './components/TabScreen/TabScreenContainer';
 
 export default Home = () => {
   const navigation = useNavigation()
@@ -21,21 +19,21 @@ export default Home = () => {
     >
       <MaterialTopTabs.Screen
         name="DashBoardManScreen"
-        component={ManTab}
+        component={TabScreens}
         options={{
           title: "MAN"
         }}
       />
       <MaterialTopTabs.Screen
         name="DashBoardWomanScreen"
-        component={WomanTab}
+        component={TabScreens}
         options={{
           title: "WOMAN"
         }}
       />
       <MaterialTopTabs.Screen
         name="DashBoardKidsScreen"
-        component={KidsTab}
+        component={TabScreens}
         options={{
           title: "KIDS"
         }}
