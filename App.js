@@ -7,7 +7,7 @@ import { StackNavigationRef } from './src/modules/Navigation/StackNavigation';
 import store from './src/redux/store';
 import CartScreen from './src/screens/cart/CartScreen';
 import CollectionScreen from './src/screens/collection';
-import DetailScreen from './src/screens/details/DetailScreen';
+import DetailScreen from './src/screens/details/DetailScreenContainer';
 import Home from './src/screens/home/index';
 import SearchScreen from './src/screens/search/SearchScreen';
 import BookMarkScreen from './src/screens/bookmark/BookMarkScreen';
