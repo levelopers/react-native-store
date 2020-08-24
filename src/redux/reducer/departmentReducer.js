@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   loading: false,
-  departments: null,
+  departments: [],
   error: null,
 }
 
@@ -30,4 +30,8 @@ export default (state = initialState, action) => {
     default:
       return state
   }
+}
+
+export function departmentByName(state, name) {
+  return state.departments && state.departments.find(d => d.departmentName === name)
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import DisplayList from '../../../components/DisplayList';
+import globalStyles from '../../../modules/globalStyles';
 
 export class ListScreen extends Component {
   constructor(props) {
@@ -21,8 +22,13 @@ export class ListScreen extends Component {
   }
   render() {
     return (
-      <View style={{ backgroundColor: 'black', minHeight: '100%' }}>
-        <DisplayList dataArray={this.products} />
+      <View style={{ backgroundColor: 'black', minHeight: '100%', flex: 1, justifyContent: "center" }}>
+        {this.props.loading
+          ? <ActivityIndicator size="large" />
+          : this.products && this.products.length > 0
+            ? <DisplayList dataArray={this.products} />
+            : <Text style={{ ...globalStyles('fontWhite'), padding: 20 }}>No Products</Text>
+        }
       </View>
     )
   }

@@ -11,10 +11,10 @@ export default class TabScreen extends Component {
   }
   componentDidMount() {
     switch (this.props.route.name) {
-      case 'DashBoardManScreen':
+      case 'DashBoardMenScreen':
         this.department = 'Men'
         break;
-      case 'DashBoardWomanScreen':
+      case 'DashBoardWomenScreen':
         this.department = 'Women'
         break;
       case 'DashBoardKidsScreen':
@@ -41,6 +41,7 @@ export default class TabScreen extends Component {
           imgUri={this.props.products(this.department).length > 1
             ? this.props.products(this.department)[1].imagePath
             : null}
+          department={this.department}
         />
       </Scrollpage>
 

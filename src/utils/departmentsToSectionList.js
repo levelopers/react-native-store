@@ -13,14 +13,19 @@ export const departmentToCollection = (department) => {
   return {
     key: 'COLLECTION',
     title: 'COLLECTION',
-    data: department.categories.split(',')
+    data: department
+      ? department.categories.split(',').filter(c => !['Shoes', 'Bags'].includes(c))
+      : []
   }
 }
 
-export const shoesBagsToCollection = (shoesBags) => {
+export const shoesBagsToCollection = (department) => {
+  const data = department
+    ? department.categories.split(',').filter(c => ['Shoes', 'Bags'].includes(c))
+    : []
   return {
     key: 'SHOES&BAGS',
-    title: 'SHOES&BAGS',
-    data: shoesBags.subCategory.split(',')
+    title: data.length > 0 ? 'SHOES&BAGS' : '',
+    data
   }
 }

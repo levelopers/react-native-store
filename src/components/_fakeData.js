@@ -95,7 +95,8 @@ export const MenDepartment = {
 
 export const WomenDepartment = {
   departmentName: 'Women',
-  categories: 'Basics,Blazer,Jackets,Dresses,T-shirt,Pants,Jeans,Shorts,Skirts,Suits'
+  categories: 'Basics,Blazer,Jackets,Dresses,T-shirt,Pants,Jeans,Shorts,Skirts,Suits',
+  
 }
 
 export const KidsDepartment = {

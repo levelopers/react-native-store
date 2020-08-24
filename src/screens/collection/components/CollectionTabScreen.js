@@ -1,38 +1,51 @@
-import React, { Component } from 'react'
-import {
-  View,
-  Text,
-  StyleSheet,
-  SectionList,
-  TouchableOpacity,
-  SafeAreaView,
-} from 'react-native'
+import React, { Component } from 'react';
+import { SectionList, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
 import Collapsible from 'react-native-collapsible';
-
-import { TouchableHighlight } from 'react-native-gesture-handler'
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { departments, MenDepartment, shoesAndBags } from '../../../components/_fakeData';
-import { departmentToCollection, shoesBagsToCollection } from '../../../utils/departmentsToSectionList';
-import { navigate } from '../../../modules/Navigation/StackNavigation'
 import globalStyles from '../../../modules/globalStyles';
+import { navigate } from '../../../modules/Navigation/StackNavigation';
+import { departmentToCollection, shoesBagsToCollection } from '../../../utils/departmentsToSectionList';
 
-export default class CollectionManTab extends Component {
+
+export default class CollectionTabScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeSection: ''
+      activeSection: '',
+      activeTitle: ''
     }
+    this.department = ''
+    this.sections = []
+  }
+
+  componentDidMount() {
+    switch (this.props.route.name) {
+      case 'CollectionMenTab':
+        this.department = 'Men'
+        break;
+      case 'CollectionWomenTab':
+        this.department = 'Women'
+        break;
+      case 'CollectionKidsTab':
+        this.department = 'Kids'
+        break;
+      default:
+        this.department = ''
+    }
+    this.props.getDepartments();
+  }
+
+  componentDidUpdate() {
     this.sections = [
       { title: 'NEW IN', data: [] },
-      departmentToCollection(MenDepartment),
-      shoesBagsToCollection(shoesAndBags)
+      departmentToCollection(this.props.departmentByName(this.department)),
+      shoesBagsToCollection(this.props.departmentByName(this.department))
     ]
   }
 
   renderSectionHeader = ({ section }) => {
     if (section.title === 'NEW IN') {
       return (
-        <TouchableOpacity onPress={() => navigate('ListScreen', { title: 'New In' })}>
+        <TouchableOpacity onPress={() => navigate('ListScreen', { title: 'New In', department: this.department })}>
           <Text style={[styles.header, styles.newInHeader]}>{section.title}</Text>
         </TouchableOpacity>
       )
@@ -55,7 +68,7 @@ export default class CollectionManTab extends Component {
         <Text
           style={styles.item}
           onPress={() => {
-            navigate('ListScreen', { title: item, category: item, department: 'Men' })
+            navigate('ListScreen', { title: item, category: item, department: this.department })
           }}>
           {item}
         </Text>
@@ -69,18 +82,20 @@ export default class CollectionManTab extends Component {
         ? ''
         : section.title,
     });
-
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <SectionList
-          sections={this.sections}
-          keyExtractor={(item, index) => index}
-          renderSectionHeader={this.renderSectionHeader}
-          renderItem={this.renderItem}
-        />
+        {this.props.loading
+          ? <ActivityIndicator size="large" />
+          : <SectionList
+            sections={this.sections}
+            keyExtractor={(item, index) => index}
+            renderSectionHeader={this.renderSectionHeader}
+            renderItem={this.renderItem}
+          />
+        }
       </View>
     )
   }
@@ -93,7 +108,7 @@ const styles = StyleSheet.create({
     height: '100%',
     paddingHorizontal: 30,
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'center'
   },
   header: {
     fontSize: 35,

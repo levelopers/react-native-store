@@ -6,7 +6,8 @@ import { navigate } from "../../../../modules/Navigation/StackNavigation";
 export default TabCollection = ({
   title,
   description,
-  imgUri
+  imgUri,
+  department
 }) => {
   return (
     <ImageBackground source={imgUri && { uri: imgUri }} style={styles.backgroundImage} resizeMode="cover">
@@ -18,11 +19,10 @@ export default TabCollection = ({
       </Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigate('CollectionScreen')}
+        onPress={() => navigate('CollectionScreen', { screen: `Collection${department}Tab` })}
       >
         <Text style={styles.btnText}>VIEW</Text>
       </TouchableOpacity>
-      {/* <CollectionModal modalVisible={modalVisible} onCloseModal={() => { setModalVisible(false) }} /> */}
     </ImageBackground>
   )
 }

@@ -1,23 +1,11 @@
-import Constants from "expo-constants";
-import React from "react";
-import {
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from "react-native";
-import Icon from 'react-native-vector-icons/Ionicons';
 import { createMaterialTopTabNavigator, MaterialTopTabBar } from '@react-navigation/material-top-tabs';
-import CollectionManTab from "./components/CollectionManTab";
-import globalStyles from "../../modules/globalStyles";
-import CollectionWomanTab from "./components/CollectionWomanTab";
-import CollectionKidsTab from "./components/CollectionKidsTab";
-import { goBack, navigate } from "../../modules/Navigation/StackNavigation";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import Icon from 'react-native-vector-icons/Ionicons';
+import { navigate } from "../../modules/Navigation/StackNavigation";
+import CollectionTabScreen from "./components/CollectionTabScreenContainer";
 
-export default CollectionScreen = ({
-  navigation
-}) => {
+export default CollectionScreen = () => {
   const CollectionScreenTopTabs = createMaterialTopTabNavigator();
   return (
     <CollectionScreenTopTabs.Navigator
@@ -30,22 +18,22 @@ export default CollectionScreen = ({
       }}
     >
       <CollectionScreenTopTabs.Screen
-        name="CollectionManTab"
-        component={CollectionManTab}
+        name="CollectionMenTab"
+        component={CollectionTabScreen}
         options={{
           title: "MAN"
         }}
       />
       <CollectionScreenTopTabs.Screen
-        name="CollectionWomanTab"
-        component={CollectionWomanTab}
+        name="CollectionWomenTab"
+        component={CollectionTabScreen}
         options={{
           title: "WOMAN"
         }}
       />
       <CollectionScreenTopTabs.Screen
         name="CollectionKidsTab"
-        component={CollectionKidsTab}
+        component={CollectionTabScreen}
         options={{
           title: "KIDS"
         }}

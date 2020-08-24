@@ -18,14 +18,14 @@ export default Home = () => {
       }}
     >
       <MaterialTopTabs.Screen
-        name="DashBoardManScreen"
+        name="DashBoardMenScreen"
         component={TabScreens}
         options={{
           title: "MAN"
         }}
       />
       <MaterialTopTabs.Screen
-        name="DashBoardWomanScreen"
+        name="DashBoardWomenScreen"
         component={TabScreens}
         options={{
           title: "WOMAN"
