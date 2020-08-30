@@ -1,55 +1,90 @@
 import Constants from "expo-constants";
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { Component } from 'react';
+import { KeyboardAvoidingView, StyleSheet, View } from "react-native";
+import ButtonClose from "../../components/Buttons/ButtonClose";
+import DisplayList from "../../components/DisplayList";
 import { goBack } from '../../modules/Navigation/StackNavigation';
+import AutoComplete from "./components/AutoCompleteContainer";
 
+export default class SearchScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      searchValue: '',
+      showingList: false
+    }
+  }
+  handleSuggest = (v) => {
+    this.props.search(v)
+    this.setState({
+      searchValue: v
+    })
+  }
+  handleInputFocus = () => {
+    this.setState({
+      showingList: false,
+      searchValue: ''
+    })
+  }
+  handleInputBlur = () => {
+    this.setState({
+      showingList: true
+    })
+  }
 
-export default SearchScreen = () => {
-
-  return (
-    <View style={styles.modalView}>
-      <TouchableHighlight
-        style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-        onPress={() => { goBack() }}
+  render() {
+    return (
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        style={styles.modalView}
       >
-        <View>
-          <Icon name="times" />
-          <Text>SearchModal</Text>
+        <View style={styles.header}>
+          <ButtonClose
+            size={30}
+            style={styles.closeButton}
+            onPress={() => { goBack() }}
+          />
+          <AutoComplete
+            style={styles.auto}
+            suggest_value={this.handleSuggest}
+            onFocus={this.handleInputFocus}
+            onBlur={this.handleInputBlur}
+            close={this.state.showingList}
+          />
         </View>
-      </TouchableHighlight>
-    </View>
-  )
+        {!!this.state.searchValue && this.state.showingList &&
+          <DisplayList
+            containerStyle={{ height: '90%' }}
+            dataArray={this.props.search_result}
+          />
+        }
+      </KeyboardAvoidingView>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
-  },
   modalView: {
-    paddingTop: Constants.statusBarHeight
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: 'black',
+    height: '100%',
+    width: '100%',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
   },
-  openButton: {
-    backgroundColor: "#F194FF",
-    borderRadius: 20,
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  closeButton: {
     padding: 10,
-    elevation: 2
+    marginLeft: 15
   },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
+  auto: {
+    marginTop: 15
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
-  }
+
 });

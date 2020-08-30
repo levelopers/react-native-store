@@ -3,8 +3,9 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import ProductCard from '../Card';
 import { navigate } from '../../modules/Navigation/StackNavigation';
 
-export default DisplayList = ({ dataArray }) => {
+export default DisplayList = ({ dataArray, containerStyle }) => {
   return (
+    <View style={containerStyle}>
       <FlatList
         data={dataArray}
         numColumns={2}
@@ -12,6 +13,7 @@ export default DisplayList = ({ dataArray }) => {
         keyExtractor={item => item._id}
         columnWrapperStyle={{ flexWrap: 'wrap', justifyContent: 'center' }}
       />
+    </View>
   )
 }
 

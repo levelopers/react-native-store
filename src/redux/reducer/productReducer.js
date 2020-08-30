@@ -27,6 +27,7 @@ const initialState = {
   product: null,
   loading: false,
   error: null,
+  search_result: []
 }
 
 export default (state = initialState, action) => {
@@ -115,7 +116,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        products: action.payload.data.products
+        search_result: action.payload.data.products
       }
     case SEARCH_FAIL:
       return {
