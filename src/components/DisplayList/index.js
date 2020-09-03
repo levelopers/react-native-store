@@ -1,15 +1,24 @@
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import ProductCard from '../Card';
 import { navigate } from '../../modules/Navigation/StackNavigation';
+import ProductCard from '../Card';
 
-export default DisplayList = ({ dataArray, containerStyle }) => {
+export default DisplayList = ({
+  dataArray,
+  renderListItem,
+  numColumns,
+  containerStyle,
+  contentContainerStyle,
+  extraData
+}) => {
   return (
     <View style={containerStyle}>
       <FlatList
+        contentContainerStyle={contentContainerStyle}
         data={dataArray}
-        numColumns={2}
-        renderItem={renderItem}
+        extraData={extraData ? extraData : null}
+        numColumns={numColumns ? numColumns : 2}
+        renderItem={renderListItem ? renderListItem : renderItem}
         keyExtractor={item => item._id}
         columnWrapperStyle={{ flexWrap: 'wrap', justifyContent: 'center' }}
       />
@@ -33,26 +42,5 @@ var renderItem = ({ item }) => {
 }
 
 const styles = StyleSheet.create({
-  cardContainer: {
-    margin: 5,
-    width: '45%'
-  },
-  cardDesc: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  cardContent: {
-    maxWidth: '80%',
-  },
-  cardContentTitle: {
-    fontSize: 12
-  },
-  cardContentPrice: {
-    fontSize: 10,
-    marginTop: 'auto'
-  },
-  cardActions: {
 
-  }
 })

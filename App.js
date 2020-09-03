@@ -10,7 +10,7 @@ import CollectionScreen from './src/screens/collection';
 import DetailScreen from './src/screens/details/DetailScreenContainer';
 import Home from './src/screens/home/index';
 import SearchScreen from './src/screens/search/SearchScreenContainer';
-import BookMarkScreen from './src/screens/bookmark/BookMarkScreen';
+import BookMarkScreen from './src/screens/bookmark/BookMarkScreenContainer';
 import AccountScreen from './src/screens/AccountScreen/AccountScreen';
 
 
